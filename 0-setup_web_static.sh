@@ -5,22 +5,24 @@ sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
 
 # Create necessary directories
-sudo mkdir -p /data/web_static/releases/test/
+sudo mkdir -p /data/
+sudo mkdir -p /data/web_static/
+sudo mkdir -p /data/web_static/releases/
 sudo mkdir -p /data/web_static/shared/
+sudo mkdir -p /data/web_static/releases/test/
 
 # Add test HTML file to the test folder
-sudo tee /data/web_static/releases/test/index.html > /dev/null <<EOF
-<html>
+sudo touch /data/web_static/releases/test/index.html
+sudo echo "<html>
   <head>
   </head>
   <body>
     Holberton School
   </body>
-</html>
-EOF
+</html>" | sudo tee /data/web_static/releases/test/index.html
 
 # Create a symbolic link to /data/web_static/current
-sudo ln -sfn /data/web_static/releases/test/ /data/web_static/current
+sudo ln -s -f /data/web_static/releases/test/ /data/web_static/current
 
 # Give ownership of the /data/ folder to ubuntu user and group
 sudo chown -R ubuntu:ubuntu /data/
